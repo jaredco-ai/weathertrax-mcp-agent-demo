@@ -1,7 +1,3 @@
-Absolutely — here is the full README.md content in a single copyable block, with no extra code windows or formatting wrappers. You can copy everything below in one go and paste it directly into GitHub’s file editor:
-
-⸻
-
 MCP Weather Tool — Sample Server
 
 This repo contains a working Model Context Protocol (MCP) server that integrates a custom weather tool. It responds to AI agent tool calls and returns current or multi-day weather forecasts using OpenWeatherMap.
