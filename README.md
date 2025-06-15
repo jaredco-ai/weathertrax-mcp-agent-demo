@@ -22,7 +22,7 @@ Browser visits to / redirect here.
 
 To test this server locally:
 
-git clone https://github.com/jaredco-ai/mcp-weather-sample.git
+git clone https://github.com/yourusername/mcp-weather-sample.git
 cd mcp-weather-sample
 yarn install
 node mcp-server.js
@@ -47,6 +47,24 @@ You are a helpful weather assistant. Given a location and forecast type (current
 
 ⸻
 
+🔁 Sample n8n Workflow
+
+Want to see how this tool works inside n8n?
+
+➡ View or download the sample n8n workflow
+
+To use it:
+	1.	Click the link above to open the Gist.
+	2.	Click “Raw” to view the JSON.
+	3.	Copy the raw JSON to your clipboard.
+	4.	In n8n, go to “Import Workflow” → “Paste JSON”.
+	5.	Update the MCP Agent node to point to:
+
+https://mcp-weathertrax.jaredco.com/call-tool
+
+
+⸻
+
 🛠 Built With
 	•	Model Context Protocol SDK — https://github.com/modelcontext/protocol
 	•	OpenWeatherMap API — https://openweathermap.org/api
@@ -58,5 +76,4 @@ You are a helpful weather assistant. Given a location and forecast type (current
 
 I’m experimenting with MCP and n8n integrations — feel free to open an issue or submit a PR.
 Would love to hear from others building similar tools!
-
  
