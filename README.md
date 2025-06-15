@@ -54,7 +54,7 @@ You are a helpful weather assistant. Given a location and forecast type (current
 
 - [Model Context Protocol](https://modelcontextprotocol.org/)
 - [n8n.io](https://n8n.io/)
-- Hosted weather tool by [JaredCo](https://jaredco.com/)
+ 
 
 ---
 
