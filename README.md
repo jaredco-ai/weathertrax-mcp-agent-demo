@@ -26,11 +26,6 @@ Download or import the sample workflow:
 1. Open the link above and click **"Raw"**
 2. Copy the JSON and go to n8n
 3. Use **Import Workflow → Paste JSON**
-4. Update the `MCP Agent` node with the tool call:
-
-```
-POST https://mcp-weathertrax.jaredco.com/call-tool
-```
 
 ---
 
