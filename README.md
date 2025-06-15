@@ -22,7 +22,7 @@ Browser visits to / redirect here.
 
 To test this server locally:
 
-git clone https://github.com/yourusername/mcp-weather-sample.git
+git clone https://github.com/jaredco-ai/mcp-weather-sample.git
 cd mcp-weather-sample
 yarn install
 node mcp-server.js
