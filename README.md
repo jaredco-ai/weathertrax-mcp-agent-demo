@@ -1,47 +1,42 @@
-# MCP Weather Tool — Sample Server
+# 🌦 MCP Weather Tool for n8n (Demo Workflow)
 
-This repo contains a working **Model Context Protocol (MCP)** server that integrates a custom weather tool. It responds to AI agent tool calls and returns current or multi-day weather forecasts using OpenWeatherMap.
-
-## 🌐 Live Server
-
-[https://mcp-weathertrax.jaredco.com](https://mcp-weathertrax.jaredco.com)  
-> This server is intended for use with AI agents or tools.  
-> Browser visits to `/` redirect here.
+This repo provides a **ready-to-use n8n workflow** that connects to a hosted [Model Context Protocol (MCP)](https://modelcontextprotocol.org/) server for weather forecasts.
 
 ---
 
-## 💡 What It Does
+## 🚀 What This Is
 
-- Accepts structured tool calls (e.g., from n8n or any MCP agent)  
-- Returns a weather forecast based on location and forecast type  
-- Responds with short, clear summaries for agent-friendly output
+- A working example of how to call a **custom MCP tool** from n8n
+- The tool fetches **current or 3-day weather forecasts**
+- Hosted MCP endpoint:  
+  👉 https://mcp-weathertrax.jaredco.com/call-tool
 
----
-
-## 🚀 Try It Out
-
-To test this server locally:
-
-```bash
-git clone https://github.com/jaredco-ai/mcp-weather-sample.git
-cd mcp-weather-sample
-yarn install
-node mcp-server.js
-```
-
-> 🔓 **No API key is required** for this sample server.
+This demo uses the **MCP Agent node** in n8n to send tool calls to the server.
 
 ---
 
-## 🧠 Agent System Message
+## 🧪 Try It in n8n
+
+Download or import the sample workflow:
+
+➡ [View or download the sample n8n workflow (GitHub Gist)](https://gist.github.com/jaredco-ai/103b2ac9fc56dcdf8dc92fcb8d33a187)
+
+### How to Use
+
+1. Open the link above and click **"Raw"**
+2. Copy the JSON and go to n8n
+3. Use **Import Workflow → Paste JSON**
+4. Update the `MCP Agent` node with the tool call:
 
 ```
-You are a helpful weather assistant. Given a location and forecast type (current or 3-day), return a short summary of the weather conditions using the tool provided.
+POST https://mcp-weathertrax.jaredco.com/call-tool
 ```
 
 ---
 
-## 🔧 Tool Input Format
+## 📥 Tool Input Format
+
+The weather tool accepts this JSON input:
 
 ```json
 {
@@ -52,30 +47,23 @@ You are a helpful weather assistant. Given a location and forecast type (current
 
 ---
 
-## 🔁 Sample n8n Workflow
+## 🧠 Suggested Agent System Message
 
-Want to see how this tool works inside n8n?
-
-➡ [View or download the sample n8n workflow on GitHub Gist](https://gist.github.com/jaredco-ai/103b2ac9fc56dcdf8dc92fcb8d33a187)
-
-To use it:
-
-1. Click the link above to open the Gist.
-2. Click **"Raw"** to view the JSON.
-3. Copy the raw JSON to your clipboard.
-4. In n8n, go to **"Import Workflow" → "Paste JSON"**.
+```
+You are a helpful weather assistant. Given a location and forecast type (current or 3-day), return a short summary of the weather conditions using the tool provided.
+```
 
 ---
 
 ## 🛠 Built With
 
-- [Model Context Protocol SDK](https://github.com/modelcontext/protocol)  
- 
-- [n8n](https://n8n.io/)
+- [Model Context Protocol](https://modelcontextprotocol.org/)
+- [n8n.io](https://n8n.io/)
+- Hosted weather tool by [JaredCo](https://jaredco.com/)
 
 ---
 
-## 🙋 Feedback or Questions?
+## 🙋 Feedback?
 
-I'm experimenting with MCP and n8n integrations — feel free to open an issue or submit a PR.  
-Would love to hear from others building similar tools!
+Feel free to open an issue or fork this repo with improvements.  
+Would love to hear from others experimenting with MCP or tool-driven AI workflows!
