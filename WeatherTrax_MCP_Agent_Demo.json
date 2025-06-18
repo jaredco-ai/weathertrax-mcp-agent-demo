@@ -1,0 +1,178 @@
+{
+  "name": "WeatherTrax MCP Agent Demo",
+  "nodes": [
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4o-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -280,
+        160
+      ],
+      "id": "5b4fa064-f1f9-4747-81a1-1d68f477850c",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "53oLIFNTotYXaFye",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json['Weather Request'] }}",
+        "options": {
+          "systemMessage": "\n\nWhen users ask about weather, you MUST call the connected weatherTool function with these exact parameters:\n- location: (string) The city or location name\n- query_type: (string) Either \"current\" for current weather or \"multi_day\" for forecasts\n- num_days: (integer) Number of days for forecast (only when using \"multi_day\")\n\nIMPORTANT: Always use the function call format for weather requests.\n\nExamples:\n- \"Weather in Boca Raton\" → Call weatherTool with location=\"Boca Raton\", query_type=\"current\"\n- \"5 day forecast for Miami\" → Call weatherTool with location=\"Miami\", query_type=\"multi_day\", num_days=5\n\nAlways extract the location from the user's request and call the weatherTool function."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        -220,
+        -60
+      ],
+      "id": "07d3bb38-9e4e-4054-96f7-f1a47585525b",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "toolDescription": "Get weather information for any location - supports current weather, forecasts, and multi-day predictions",
+        "method": "POST",
+        "url": "https://mcp-weathertrax.jaredco.com",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('JSON', ``, 'json') }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "position": [
+        -40,
+        160
+      ],
+      "id": "3b6d46cd-5fd5-4e1b-be6e-ee1d38243a0d",
+      "name": "MCP - WeatherTrax"
+    },
+    {
+      "parameters": {
+        "jsCode": "return [{ fullAgentOutput: $json, toolCall: $json.tool_call, toolParams: $json.tool_call?.input, message: '✅ Click this node to view the tool call and parsed input!' }]"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        140,
+        -60
+      ],
+      "id": "f85c933c-bbbc-4258-beef-730376bcdd78",
+      "name": "🧪 View Results Here"
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "Weather Request",
+              "value": "What is the weather in New York City?"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 2,
+      "position": [
+        -440,
+        -60
+      ],
+      "id": "c6beafa9-b079-4c91-8dde-c9b44c18b155",
+      "name": "🧪 Enter weather request"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -680,
+        -60
+      ],
+      "id": "027ab837-512d-4fc5-9c5d-b7491e94e57d",
+      "name": "When clicking ‘Execute workflow’"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "🧪 View Results Here",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "MCP - WeatherTrax": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "🧪 Enter weather request": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "🧪 Enter weather request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "a6ff7fde-e347-45e3-8053-a74f9b099a06",
+  "meta": {
+    "instanceId": "04825daa9471a5540d9cbe929ad35145fdd237d05aa1593716515dbb7e6d5f84"
+  },
+  "id": "DtcpXZZBN3IgksKb",
+  "tags": []
+}
