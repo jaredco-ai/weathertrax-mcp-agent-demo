@@ -1,64 +1,89 @@
-# 🌦 MCP Weather Tool for n8n (Demo Workflow)
+# 🌦 WeatherTrax MCP Agent Demo — n8n Workflow
 
-This repo provides a **ready-to-use n8n workflow** that connects to a hosted [Model Context Protocol (MCP)](https://modelcontextprotocol.org/) server for weather forecasts.
+This is a fully working example of how to call an external [MCP](https://modelcontext.org/) weather tool using **OpenAI's function-calling agent node inside n8n**.
 
----
-
-## 🚀 What This Is
-
-- A working example of how to call a **custom MCP tool** from n8n
-- The tool fetches **current or 3-day weather forecasts**
-- Hosted MCP endpoint:  
-  👉 https://mcp-weathertrax.jaredco.com/call-tool
-
-This demo uses the **MCP Agent node** in n8n to send tool calls to the server.
+✅ Ready to run — no editing required. Includes a manual trigger for quick testing.
 
 ---
 
-## 🧪 Try It in n8n
+## 🚀 Features
 
-Download or import the sample workflow:
-
-➡ [View or download the sample n8n workflow (GitHub Gist)](https://gist.github.com/jaredco-ai/103b2ac9fc56dcdf8dc92fcb8d33a187)
-
-### How to Use
-
-1. Open the link above and click **"Raw"**
-2. Copy the JSON and go to n8n
-3. Use **Import Workflow → Paste JSON**
+- 📍 Natural language weather questions (e.g., “What's the 3-day forecast in Miami?”)
+- ⚙️ Calls an external MCP server at [`https://mcp-weathertrax.jaredco.com`](https://mcp-weathertrax.jaredco.com)
+- 🧠 Uses OpenAI GPT-4o via the Langchain Agent Node
+- 🧪 Includes a built-in test input — no need to use a form on first run
+- 🧾 Final debug node clearly shows function call + extracted parameters
 
 ---
 
-## 📥 Tool Input Format
+## 📥 How to Use
 
-The weather tool accepts this JSON input:
+### 1. 🧠 Connect Your OpenAI API Key (Required)
+
+Before running:
+
+1. Click the `OpenAI Chat Model` node
+2. Under **Credentials**, select your OpenAI account or click "Create New"
+3. Paste your [OpenAI API key](https://platform.openai.com/account/api-keys)
+4. Save
+
+---
+
+### 2. ▶️ Run the Workflow
+
+1. Click the `🧪 Enter weather request` node
+2. Press “Execute Workflow” from the top
+3. The agent will parse the request and call the weather tool
+
+---
+
+### 3. 🧪 View the Output
+
+Click the `🧪 View Results Here` node after execution to see:
+
+- Full agent output
+- The generated `tool_call`
+- Parsed weather parameters (e.g., `location`, `query_type`, `num_days`)
+
+---
+
+## 🌤 About the Weather Tool
+
+This MCP tool is hosted at:
+
+```
+https://mcp-weathertrax.jaredco.com
+```
+
+### Example Inputs:
 
 ```json
 {
-  "location": "New York",
-  "forecastType": "current" // or "3-day"
+  "tool": "weatherTool",
+  "input": {
+    "location": "Boca Raton",
+    "query_type": "current"
+  }
+}
+```
+
+```json
+{
+  "tool": "weatherTool",
+  "input": {
+    "location": "Miami",
+    "query_type": "multi_day",
+    "num_days": 5
+  }
 }
 ```
 
 ---
 
-## 🧠 Suggested Agent System Message
+## 🔽 Download & Import into n8n
 
-```
-You are a helpful weather assistant. Given a location and forecast type (current or 3-day), return a short summary of the weather conditions using the tool provided.
-```
-
----
-
-## 🛠 Built With
-
-- [Model Context Protocol](https://modelcontextprotocol.org/)
-- [n8n.io](https://n8n.io/)
- 
+1. Download [`WeatherTrax_MCP_Agent_Demo.json`](./WeatherTrax_MCP_Agent_Demo.json)
+2. In n8n, click **Import workflow** > **From file**
+3. Attach your OpenAI credential and click “Execute Workflow”
 
 ---
-
-## 🙋 Feedback?
-
-Feel free to open an issue or fork this repo with improvements.  
-Would love to hear from others experimenting with MCP or tool-driven AI workflows!
