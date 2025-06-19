@@ -15,6 +15,8 @@ This is a fully working example of how to call an external [MCP](https://modelco
 - 🧾 Final debug node clearly shows function call + extracted parameters
 
 ---
+![WeatherTrax Agent Workflow](https://github.com/jaredco-ai/weathertrax-mcp-agent-demo/raw/main/WeatherTrax-n8n.jpg)
+
 
 ## 📥 How to Use
 
