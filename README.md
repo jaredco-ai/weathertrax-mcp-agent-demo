@@ -4,6 +4,8 @@ This is a fully working example of how to call an external [MCP](https://modelco
 
 ✅ Ready to run — no editing required. Includes a manual trigger for quick testing.
 
+✅ No authentication required; public endpoint for testing.
+
 ---
 
 ## 🚀 Features
